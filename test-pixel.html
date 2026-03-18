@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste TikTok Pixel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    
+    .status-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border-left: 4px solid #667eea;
+    }
+    
+    .status-card.success {
+      border-left-color: #4caf50;
+      background: #e8f5e9;
+    }
+    
+    .status-card.error {
+      border-left-color: #f44336;
+      background: #ffebee;
+    }
+    
+    .status-card.warning {
+      border-left-color: #ff9800;
+      background: #fff3e0;
+    }
+    
+    .status-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    
+    .status-details {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .event-list {
+      margin-top: 30px;
+    }
+    
+    .event-item {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border-left: 3px solid #667eea;
+    }
+    
+    .event-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    
+    .event-data {
+      font-size: 12px;
+      color: #666;
+      font-family: 'Courier New', monospace;
+      background: white;
+      padding: 8px;
+      border-radius: 4px;
+      margin-top: 5px;
+    }
+    
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 10px 10px 10px 0;
+      transition: background 0.3s;
+    }
+    
+    button:hover {
+      background: #5568d3;
+    }
+    
+    .test-buttons {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    .log {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      max-height: 400px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+    
+    .log-line {
+      margin-bottom: 5px;
+    }
+    
+    .log-line.success {
+      color: #4caf50;
+    }
+    
+    .log-line.error {
+      color: #f44336;
+    }
+    
+    .log-line.warning {
+      color: #ff9800;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Teste TikTok Pixel</h1>
+    <p class="subtitle">Verifica se todos os eventos estão sendo disparados corretamente</p>
+    
+    <div id="pixel-status" class="status-card">
+      <div class="status-title">Verificando Pixel...</div>
+      <div class="status-details">A verificar se o pixel está carregado...</div>
+    </div>
+    
+    <div class="test-buttons">
+      <h3 style="margin-bottom: 15px;">Testar Eventos:</h3>
+      <button onclick="testViewContent()">📄 ViewContent</button>
+      <button onclick="testContact()">📞 Contact</button>
+      <button onclick="testAddToCart()">🛒 AddToCart</button>
+      <button onclick="testInitiateCheckout()">🛍️ InitiateCheckout</button>
+      <button onclick="testSubmitForm()">📝 SubmitForm</button>
+      <button onclick="testGenerateLead()">🎯 GenerateLead</button>
+      <button onclick="testCompletePayment()">💳 CompletePayment</button>
+      <button onclick="testPurchase()">💰 Purchase</button>
+    </div>
+    
+    <div class="event-list">
+      <h3 style="margin-bottom: 15px; margin-top: 30px;">Eventos Disparados:</h3>
+      <div id="events-log" class="log">
+        <div class="log-line">Aguardando eventos...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carregar pixel e scripts do funil para testar -->
+  <!-- TikTok Pixel Oficial -->
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+      ttq.load('D6TCE13C77UANC7OTQ1G');
+      ttq.page();
+    }(window, document, 'ttq');
+  </script>
+  
+  <script src="js/tiktok-pixel.js"></script>
+  
+  <script>
+    const eventsLog = document.getElementById('events-log');
+    const pixelStatus = document.getElementById('pixel-status');
+    
+    function addLog(message, type = 'info') {
+      const timestamp = new Date().toLocaleTimeString('pt-PT');
+      const logLine = document.createElement('div');
+      logLine.className = `log-line ${type}`;
+      logLine.textContent = `[${timestamp}] ${message}`;
+      eventsLog.insertBefore(logLine, eventsLog.firstChild);
+      
+      // Limitar a 50 linhas
+      while (eventsLog.children.length > 50) {
+        eventsLog.removeChild(eventsLog.lastChild);
+      }
+    }
+    
+    function checkPixelStatus() {
+      const statusTitle = pixelStatus.querySelector('.status-title');
+      const statusDetails = pixelStatus.querySelector('.status-details');
+      
+      let pixelLoaded = false;
+      let methods = [];
+      
+      if (typeof ttq !== 'undefined' && ttq.track) {
+        pixelLoaded = true;
+        methods.push('ttq (API padrão)');
+      }
+      
+      if (typeof window !== 'undefined' && window.tiktokq) {
+        pixelLoaded = true;
+        methods.push('tiktokq');
+      }
+      
+      if (pixelLoaded) {
+        pixelStatus.className = 'status-card success';
+        statusTitle.textContent = '✅ Pixel TikTok Carregado';
+        statusDetails.innerHTML = `
+          <strong>Métodos disponíveis:</strong><br>
+          ${methods.join('<br>')}<br><br>
+          <strong>Pixel ID:</strong> D6TCE13C77UANC7OTQ1G
+        `;
+      } else {
+        pixelStatus.className = 'status-card error';
+        statusTitle.textContent = '❌ Pixel TikTok NÃO Encontrado';
+        statusDetails.textContent = 'O pixel não está carregado. Verifica se está instalado corretamente no index.html';
+      }
+    }
+    
+    // Interceptar chamadas de trackTikTokEvent para logar
+    const originalTrackTikTokEvent = window.trackTikTokEvent;
+    if (typeof trackTikTokEvent === 'function') {
+      window.trackTikTokEvent = function(eventName, eventData) {
+        addLog(`📤 Evento disparado: ${eventName}`, 'success');
+        addLog(`   Dados: ${JSON.stringify(eventData)}`, 'info');
+        return originalTrackTikTokEvent(eventName, eventData);
+      };
+    }
+    
+    function testViewContent() {
+      if (typeof trackPageView === 'function') {
+        trackPageView();
+        addLog('✅ Teste ViewContent executado', 'success');
+      } else {
+        addLog('❌ Função trackPageView não encontrada', 'error');
+      }
+    }
+    
+    function testContact() {
+      if (typeof trackContact === 'function') {
+        trackContact();
+        addLog('✅ Teste Contact executado', 'success');
+      } else {
+        addLog('❌ Função trackContact não encontrada', 'error');
+      }
+    }
+    
+    function testAddToCart() {
+      if (typeof trackAddToCart === 'function') {
+        trackAddToCart(947.00);
+        addLog('✅ Teste AddToCart executado (€947.00)', 'success');
+      } else {
+        addLog('❌ Função trackAddToCart não encontrada', 'error');
+      }
+    }
+    
+    function testInitiateCheckout() {
+      if (typeof trackInitiateCheckout === 'function') {
+        trackInitiateCheckout(12.97);
+        addLog('✅ Teste InitiateCheckout executado (€12.97)', 'success');
+      } else {
+        addLog('❌ Função trackInitiateCheckout não encontrada', 'error');
+      }
+    }
+    
+    function testSubmitForm() {
+      if (typeof trackSubmitForm === 'function') {
+        trackSubmitForm('mbway');
+        addLog('✅ Teste SubmitForm executado (MB Way)', 'success');
+      } else {
+        addLog('❌ Função trackSubmitForm não encontrada', 'error');
+      }
+    }
+    
+    function testGenerateLead() {
+      if (typeof trackGenerateLead === 'function') {
+        trackGenerateLead('mbway', 12.97, 'test-transaction-123');
+        addLog('✅ Teste GenerateLead executado', 'success');
+      } else {
+        addLog('❌ Função trackGenerateLead não encontrada', 'error');
+      }
+    }
+    
+    function testCompletePayment() {
+      if (typeof trackCompletePayment === 'function') {
+        trackCompletePayment(12.97, 'test-transaction-123');
+        addLog('✅ Teste CompletePayment executado (€12.97)', 'success');
+      } else {
+        addLog('❌ Função trackCompletePayment não encontrada', 'error');
+      }
+    }
+    
+    function testPurchase() {
+      if (typeof trackPurchase === 'function') {
+        trackPurchase(12.97, 'test-transaction-123');
+        addLog('✅ Teste Purchase executado (€12.97)', 'success');
+      } else {
+        addLog('❌ Função trackPurchase não encontrada', 'error');
+      }
+    }
+    
+    // Verificar status do pixel
+    setTimeout(checkPixelStatus, 2000);
+    setInterval(checkPixelStatus, 5000);
+    
+    // Verificar eventos pendentes
+    try {
+      const pendingEvents = JSON.parse(localStorage.getItem('tiktok_pending_events') || '[]');
+      if (pendingEvents.length > 0) {
+        addLog(`⚠️ ${pendingEvents.length} eventos pendentes encontrados no localStorage`, 'warning');
+      }
+    } catch (e) {
+      addLog('❌ Erro ao verificar eventos pendentes', 'error');
+    }
+    
+    addLog('🚀 Página de teste carregada', 'success');
+  </script>
+</body>
+</html>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "so2x5yknj2");
+</script>
+
+<!-- TikTok Pixel Oficial -->
+<script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+    ttq.load('D5S7LCJC77U7L31UJJEG');
+    ttq.page();
+  }(window, document, 'ttq');
+</script>
+
+  <meta charset="UTF-8">
+  <title>Tu progreso anual</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      background: linear-gradient(135deg, #fdf2f7, #fee2e2, #e0f2fe);
+      background-size: 200% 200%;
+      animation: bgMove 12s ease-in-out infinite;
+      position: relative;
+      overflow-x: hidden;
+      /* permite rolar pra baixo */
+    }
+
+    @keyframes bgMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* canvas de partículas */
+    #bgCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .card {
+      max-width: 900px;
+      max-height: 95vh;
+      width: 100%;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .08);
+      padding: 24px 24px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      overflow-y: auto;
+    }
+
+    .left {
+      flex: 1;
+      text-align: center!important;
+    }
+
+    h1 {
+      font-size: 26px;
+      line-height: 1.2;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+
+    h1 span.highlight {
+      color: #f43f5e;
+      margin-top: 20px!important;
+      display: inline-block;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #4b5563;
+      margin-bottom: 12px;
+    }
+
+    /* vídeo do calendário acima das datas */
+    .calendar-img {
+      max-width: 180px;
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+      margin: 10px auto 16px auto;
+      overflow: hidden;
+    }
+
+    .calendar-img video {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+    }
+
+    /* linha de meses (container) */
+    .months {
+      position: relative;
+      padding: 8px 0;
+      margin-bottom: 18px;
+      width: 100%;
+    }
+
+    /* agrupamento das linhas de meses */
+    .months-inner {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding-left: 0;
+    }
+
+    /* cada linha: 5 colunas (mês, conector, mês, conector, mês) */
+    .months-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      column-gap: 10px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .month-item {
+      padding: 11px 8px;
+      border-radius: 14px;
+      background: #ffe4ea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #111827;
+      opacity: .5;
+      text-align: center;
+      transition:
+        opacity .2s,
+        transform .2s,
+        box-shadow .2s,
+        background .2s,
+        color .2s;
+      min-width: 0;
+    }
+
+    .month-item.active {
+      opacity: 1;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(244, 63, 94, .35);
+    }
+
+    /* meses concluídos (verde) */
+    .month-item.completed {
+      background: #ecfdf3;
+      color: #166534;
+      opacity: 1;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, .30);
+    }
+
+    /* último período pendente/vermelho (até concluir) */
+    .month-item.pending {
+      background: #fee2e2;
+      color: #b91c1c;
+      opacity: 1;
+      box-shadow: 0 4px 12px rgba(248, 113, 113, .35);
+    }
+
+    .check-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 2px solid #f43f5e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      flex-shrink: 0;
+      transition: border-color .2s, background .2s;
+    }
+
+    .check-circle svg {
+      width: 12px;
+      height: 12px;
+      fill: none;
+      stroke: #f43f5e;
+      stroke-width: 2;
+      transition: stroke .2s;
+    }
+
+    /* check verde para concluídos */
+    .month-item.completed .check-circle {
+      border-color: #22c55e;
+      background: #dcfce7;
+    }
+
+    .month-item.completed .check-circle svg {
+      stroke: #16a34a;
+    }
+
+    /* check vermelho para pendente */
+    .month-item.pending .check-circle {
+      border-color: #ef4444;
+      background: #fee2e2;
+    }
+
+    .month-item.pending .check-circle svg {
+      stroke: #b91c1c;
+    }
+
+    /* conectores ocupam a coluna inteira, mas visualmente são estreitos */
+    .month-connector {
+      width: 100%;
+      max-width: 20px;
+      height: 4px;
+      border-radius: 999px;
+      background: #fee2e2;
+      position: relative;
+      overflow: hidden;
+      justify-self: center;
+    }
+
+    .month-connector-fill {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      border-radius: inherit;
+      transition: width .35s linear;
+    }
+
+    .progress-info {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+
+    /* animação de flutuar do botão */
+    @keyframes floatBtn {
+      0% {
+        transform: translateY(0);
+        box-shadow: 0 10px 24px rgba(244, 63, 94, .35);
+      }
+
+      50% {
+        transform: translateY(-5px);
+        box-shadow: 0 18px 32px rgba(244, 63, 94, .5);
+      }
+
+      100% {
+        transform: translateY(0);
+        box-shadow: 0 10px 24px rgba(244, 63, 94, .35);
+      }
+    }
+
+    .btn {
+      display: flex;
+      /* <--- aqui o pulo do gato */
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      border: none;
+      outline: none;
+      background: #f43f5e;
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform .12s, box-shadow .12s, opacity .12s;
+      box-shadow: 0 10px 24px rgba(244, 63, 94, .35);
+      opacity: 0;
+      pointer-events: none;
+      margin: 0 auto;
+      /* centraliza dentro da coluna */
+    }
+
+    .btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+      animation: floatBtn 2.4s ease-in-out infinite;
+    }
+
+    .btn:hover {
+      animation: none;
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(244, 63, 94, .55);
+    }
+
+    /* LOADER TIKTOK – tela branca com bolinha azul/rosa */
+    .tiktok-loader-overlay {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    .tiktok-loader-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 6px solid rgba(0, 0, 0, 0.06);
+      border-top-color: #00f2ea;
+      /* azul água */
+      border-right-color: #ff0050;
+      /* rosa TikTok */
+      animation: tiktok-spin 1s linear infinite;
+      margin-bottom: 18px;
+    }
+
+    .tiktok-loader-text {
+      font-size: 14px;
+      color: #111827;
+      opacity: .7;
+    }
+
+    @keyframes tiktok-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width:700px) {
+      .card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn {
+        margin: 0 auto;
+        /* garante centralizado também no mobile */
+      }
+
+      .calendar-img {
+        max-width: 240px;
+        margin-bottom: 16px;
+      }
+
+      .months-inner {
+        padding-left: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- fundo de partículas -->
+  <canvas id="bgCanvas"></canvas>
+
+  <div class="card">
+    <div class="left">
+      <h1>
+        <!-- Parabéns!<br>Concluíste todas as atividades do ano.<br> -->
+        <span class="highlight">¡Mira tu progreso!</span>
+      </h1>
+      <p class="subtitle" style="margin-top: 12px">
+        Estamos cargando tu historial mes a mes. <br> Espera unos segundos
+        mientras confirmamos todas las etapas.
+      </p>
+
+      <!-- calendario.mp4 em cima das datas -->
+      <div class="calendar-img">
+        <video src="https://rewards2.vercel.app/media/calendario5.mp4" autoplay="" muted="" loop="" playsinline=""></video>
+      </div>
+
+      <div class="months">
+        <div class="months-inner" id="months">
+          <!-- Linha 1 -->
+          <div class="months-row">
+            <div class="month-item">
+              <div class="check-circle">
+                <svg viewbox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              1/2
+            </div>
+
+            <!-- CONECTOR 0 -->
+            <div class="month-connector">
+              <div class="month-connector-fill"></div>
+            </div>
+
+            <div class="month-item">
+              <div class="check-circle">
+                <svg viewbox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              3/4
+            </div>
+
+            <!-- CONECTOR 1 -->
+            <div class="month-connector">
+              <div class="month-connector-fill"></div>
+            </div>
+
+            <div class="month-item">
+              <div class="check-circle">
+                <svg viewbox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              5/6
+            </div>
+          </div>
+
+          <!-- Linha 2 -->
+          <div class="months-row">
+            <div class="month-item">
+              <div class="check-circle">
+                <svg viewbox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              7/8
+            </div>
+
+            <!-- CONECTOR 2 -->
+            <div class="month-connector">
+              <div class="month-connector-fill"></div>
+            </div>
+
+            <div class="month-item">
+              <div class="check-circle">
+                <svg viewbox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              9/10
+            </div>
+
+            <!-- CONECTOR 3 -->
+            <div class="month-connector">
+              <div class="month-connector-fill"></div>
+            </div>
+
+            <div class="month-item pending">
+              <div class="check-circle">
+                <svg viewbox="0 0 24 24">
+                  <path d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              11/12
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-info" id="progressText">
+        Iniciando carga de Ene/Feb…
+      </div>
+
+      <button class="btn" id="claimBtn">
+        <!-- ícone de moeda -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-coin" viewbox="0 0 16 16">
+          <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z">
+          </path>
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path>
+          <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12"></path>
+        </svg>
+        Canjear progreso
+      </button>
+    </div>
+  </div>
+
+  <!-- TELA BRANCA DE CARREGAMENTO TIKTOK -->
+  <div class="tiktok-loader-overlay" id="tiktok-loader">
+    <div class="tiktok-loader-circle"></div>
+    <div class="tiktok-loader-text">Validando acceso...</div>
+  </div>
+
+  <script>
+    const monthItems = Array.from(document.querySelectorAll('.month-item'));
+    const connectorFills = Array.from(document.querySelectorAll('.month-connector-fill'));
+    const progressText = document.getElementById('progressText');
+    const claimBtn = document.getElementById('claimBtn');
+
+    const labels = [
+      'Ene/Feb',
+      'Mar/Abr',
+      'May/Jun',
+      'Jul/Ago',
+      'Sep/Oct',
+      'Nov/Dic'
+    ];
+
+    let currentIndex = 0;
+    const totalSteps = labels.length;
+    const stepTime = 900;
+    let loop;
+
+    function updateStep() {
+      monthItems.forEach((item, i) => {
+        const isLast = (i === totalSteps - 1);
+
+        item.classList.toggle('active', i === currentIndex);
+
+        const completed = !isLast && i < currentIndex;
+        item.classList.toggle('completed', completed);
+      });
+
+      // conectores enchendo conforme o progresso
+      connectorFills.forEach((fill, i) => {
+        let fillIt = false;
+        if (i === 0 && currentIndex >= 1) fillIt = true;
+        if (i === 1 && currentIndex >= 2) fillIt = true;
+        if (i === 2 && currentIndex >= 4) fillIt = true;
+        if (i === 3 && currentIndex >= 5) fillIt = true;
+        fill.style.width = fillIt ? '100%' : '0%';
+      });
+
+      if (currentIndex < totalSteps - 2) {
+        progressText.textContent = 'Cargando ' + labels[currentIndex + 1] + '…';
+      } else if (currentIndex === totalSteps - 2) {
+        progressText.textContent = 'Cargando último período (Nov/Dic)…';
+      } else {
+        // Quando termina tudo: deixa 11/12 verde como os outros
+        const lastItem = monthItems[totalSteps - 1];
+        lastItem.classList.remove('pending');
+        lastItem.classList.add('completed');
+
+        progressText.textContent = '¡Tu progreso se ha completado con éxito!';
+        claimBtn.classList.add('visible');
+        clearInterval(loop);
+      }
+    }
+
+    updateStep();
+
+    loop = setInterval(() => {
+      if (currentIndex < totalSteps - 1) {
+        currentIndex++;
+        updateStep();
+      }
+    }, stepTime);
+
+    // Mostra a tela branca com bolinha azul/rosa por 3s e depois redireciona
+    function mostrarLoaderTikTok() {
+      const loader = document.getElementById('tiktok-loader');
+      if (loader) {
+        loader.style.display = 'flex';
+      }
+
+      // opcional: esconde o card por trás
+      const card = document.querySelector('.card');
+      if (card) card.style.visibility = 'hidden';
+
+      setTimeout(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const finalUrl = 'index.html' + (urlParams.toString() ? '?' + urlParams.toString() : '');
+        window.location.href = finalUrl;
+      }, 3000);
+    }
+
+    // Redireciona ao clicar em "Resgatar progresso" com o loader
+    claimBtn.addEventListener('click', () => {
+      mostrarLoaderTikTok();
+    });
+
+    /* ------ PARTÍCULAS NO FUNDO (MAIORES E COM CONTRASTE) ------ */
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+
+    function createParticles(count) {
+      const palette = [
+        { r: 244, g: 63, b: 94 },   // rosa f43f5e
+        { r: 56, g: 189, b: 248 },  // azul claro
+        { r: 248, g: 250, b: 252 }  // quase branco
+      ];
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        const color = palette[Math.floor(Math.random() * palette.length)];
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: 2 + Math.random() * 3.5,
+          speedY: 0.25 + Math.random() * 0.6,
+          speedX: (Math.random() - 0.5) * 0.4,
+          alpha: 0.4 + Math.random() * 0.4,
+          color
+        });
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + p.color.r + ',' + p.color.g + ',' + p.color.b + ',' + p.alpha + ')';
+        ctx.fill();
+
+        p.y += p.speedY;
+        p.x += p.speedX;
+
+        if (p.y - p.r > height) {
+          p.y = -p.r;
+          p.x = Math.random() * width;
+        }
+        if (p.x < -10) p.x = width + 10;
+        if (p.x > width + 10) p.x = -10;
+      });
+      requestAnimationFrame(drawParticles);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createParticles(45);
+    });
+
+    // iniciar partículas já na entrada da página
+    resizeCanvas();
+    createParticles(45);
+    drawParticles();
+  </script>
+
+  <script src="js/anti-copy.js"></script>
+</body>
+
+</html>

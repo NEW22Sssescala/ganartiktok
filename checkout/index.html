@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Pago</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="checkout.css">
+  <!-- TikTok Pixel -->
+  <script>
+    !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};ttq.load('D5S7LCJC77U7L31UJJEG');ttq.page();}(window,document,'ttq');
+  </script>
+</head>
+<body>
+  <div class="checkout-container">
+    <div class="checkout-header">
+      <h1>Pago de la Tasa</h1>
+      <div class="amount">€12,97</div>
+    </div>
+
+    <div class="checkout-content">
+      <div class="checkout-summary">
+        <div class="summary-row">
+          <span>Tasa de verificación:</span>
+          <strong>€12,97</strong>
+        </div>
+        <div class="summary-row total">
+          <span>Total a pagar:</span>
+          <strong>€12,97</strong>
+        </div>
+      </div>
+
+      <div class="payment-methods-info">
+        <span class="icon">💳</span>
+        <div>
+          <strong>Métodos disponibles:</strong>
+          <span id="payment-methods-label">Tarjeta de crédito/débito, Google Pay y Apple Pay</span>
+        </div>
+      </div>
+
+      <div class="checkout-payment-warning">
+        ⚠️ Los pagos por Bizum y transferencia bancaria no están permitidos para la tasa de verificación de identidad, ya que estos métodos comprometen el proceso de reembolso automático.
+      </div>
+
+      <button type="button" class="checkout-btn" id="checkout-btn">
+        Pagar €12,97
+      </button>
+
+      <div class="checkout-error" id="checkout-error"></div>
+    </div>
+
+    <div class="checkout-footer">
+      <p>🔒 Pago seguro a través de Cooud</p>
+      <p>Serás redirigido al checkout</p>
+    </div>
+  </div>
+
+  <script src="../js/anti-copy.js"></script>
+  <script src="config.js"></script>
+  <script>
+    // Atualizar valor exibido a partir da config
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof COOUD_CONFIG !== 'undefined') {
+        const amount = COOUD_CONFIG.amount || 12.97;
+        document.querySelectorAll('.amount, .checkout-btn').forEach(el => {
+          if (el.classList.contains('amount')) el.textContent = `€${amount.toFixed(2)}`;
+          if (el.id === 'checkout-btn') el.textContent = `Pagar €${amount.toFixed(2)}`;
+        });
+        document.querySelectorAll('.summary-row strong').forEach((el, i) => {
+          if (i < 2) el.textContent = `€${amount.toFixed(2)}`;
+        });
+      }
+    });
+  </script>
+  <script src="checkout.js"></script>
+</body>
+</html>
