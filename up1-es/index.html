@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+<script>
+  window.tikTokPixelId = "696c75597f170d9dd0bb381c";
+
+  var a = document.createElement("script");
+
+  a.setAttribute("async", "");
+
+  a.setAttribute("defer", "");
+
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
+
+  document.head.appendChild(a);
+
+</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TikTok | Solicitud de Retiro</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
+  <link rel="shortcut icon" href="images/faveicon.png" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
+      color: #111;
+    }
+
+    .header {
+      background-color: #fff;
+      padding: 8px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      flex-wrap: nowrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      height: 40px;
+      margin-left: -10px;
+    }
+
+    .logo img {
+      width: 300px;
+      mix-blend-mode: multiply;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .saldo-box {
+      text-align: right;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .saldo-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .saldo-valor {
+      font-size: 20px;
+      font-weight: 700;
+      color: #FE2B54;
+    }
+
+    .mensagem {
+      max-width: 500px;
+      margin: 30px auto;
+      margin-left: 20px;
+      margin-right: 20px;
+      font-size: 15px;
+      background-color: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 10px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .logos-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin: 10px 0;
+    }
+
+    .logos-container img {
+      height: 35px;
+      width: auto;
+    }
+
+    .container p {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .cta-button {
+      background-color: #FE2B54;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 16px 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      max-width: 360px;
+      transition: 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .cta-button:hover {
+      background-color: #FE2B54;
+    }
+
+    .progress-container {
+      width: 100%;
+      background-color: #eee;
+      border-radius: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 16px;
+      background-color: #27ae60;
+      text-align: center;
+      line-height: 16px;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      transition: width 0.5s ease-in-out;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        flex-wrap: nowrap;
+      }
+
+      .logo img {
+        width: 90px;
+      }
+
+      .saldo-box {
+        text-align: right;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <img src="./images/tiktok1689.jpg" alt="TikTok" style="width: 120px;" />
+    </div>
+    <div class="saldo-box">
+      <div class="saldo-label">Saldo Disponible</div>
+      <div class="saldo-valor">€ <span class="saldoAtualizado">947,00</span></div>
+    </div>
+  </div>
+
+  <div class="mensagem">
+    Su solicitud de retiro ha sido registrada con éxito. El importe se procesará en un máximo de <strong>28 días hábiles</strong> a través de la cuenta de cobro registrada.
+  </div>
+
+  <div class="container">
+    <div class="logos-container">
+      <img src="images/logombway.png" alt="MB Way" />
+      <img src="images/logoiban.png" alt="IBAN" />
+    </div>
+
+    <div class="progress-container">
+        <div id="myProgressBar" class="progress-bar">0%</div>
+      </div>
+
+    <p>Estamos procesando su retiro por valor de € 947,00 y las tasas reembolsables que serán sumadas y enviadas.</p>
+
+    <p>Para conveniencia de los usuarios, ofrecemos la opción de <strong>anticipar el retiro</strong> mediante el pago único de la Tasa de Anticipación.</p>
+
+    <p>Al confirmar el pago, el importe total será depositado en la cuenta indicada en un máximo de <strong>2 minutos hábiles</strong>.</p>
+
+
+    <a href="https://go.centerpag.com/PPU38CQ959K">
+      <button class="cta-button">Pagar Tasa de Anticipación y recibir ahora</button>
+    </a>
+  </div>
+
+  <div class="footer">
+    TikTok © 2025<br />
+    Esta es una comunicación oficial de la plataforma.
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const saldoElemento = document.querySelector('.saldoAtualizado');
+      const saldoFinal = 2770.00;
+      const saldoInicial = 2700.00;
+      const duracao = 2000;
+      const passos = 100;
+      const incremento = (saldoFinal - saldoInicial) / passos;
+      const tempo = duracao / passos;
+
+      let saldoAtual = saldoInicial;
+
+      function atualizarSaldo() {
+        saldoAtual += incremento;
+        // Formato español: 947,00
+        const valorFormatado = saldoAtual.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        saldoElemento.textContent = valorFormatado;
+        if (saldoAtual < saldoFinal) {
+          setTimeout(atualizarSaldo, tempo);
+        } else {
+          saldoElemento.textContent = '947,00';
+        }
+      }
+
+      atualizarSaldo();
+    });
+
+    window.onload = function () {
+      const progressBar = document.getElementById('myProgressBar');
+      let width = 0;
+      const interval = setInterval(() => {
+        if (width >= 95) {
+          clearInterval(interval);
+        } else {
+          width++;
+          progressBar.style.width = width + '%';
+          progressBar.textContent = width + '%';
+        }
+      }, 20);
+    };
+  </script>
+</body>
+</html>
