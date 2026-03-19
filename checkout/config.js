@@ -6,7 +6,7 @@
 
 const COOUD_CONFIG = {
   // URL direta do checkout Cooud (funciona sem API)
-  checkoutUrl: 'https://checkout.cooud.com/01KKNY38CJ4AA2N8PWERQ56FTV',
+  checkoutUrl: 'https://go.centerpag.com/PPU38CQ94U5',
 
   apiUrl: 'create-session.php',
   accessToken: 'orbit_at_79tvIPxJS5V7lfkAfrnUSHud_ZuzPtkLFf4t-h7er4Q',
